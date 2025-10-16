@@ -11,34 +11,30 @@ public class Main {
 
 
         Scanner sc = new Scanner(System.in);
-        String[] strarr = {"Anna", "Gustav", "Bernt", "Lisa", "Jakob", "Sebastian", "Nina"};
-        boolean sortiert = false;
+        String[] strarr = {"Anne", "Gustav", "Bernt", "Lisa", "Jakob", "Sebastian", "Nina","Anna"};
 
 
-        while (!sortiert) {
-            System.out.println("Welche Sortierung wollen Sie verwenden? (selection || insertion)");
-            String eingabe1 = sc.next();
-
-            if (eingabe1.equals("insertion") || eingabe1.equals("Insertion")) {
-                insertionSort(strarr);
-                sortiert = true;
-
-            } else if (eingabe1.equals("selection") || eingabe1.equals("Selection")) {
-                selectionSort(strarr);
-                sortiert = true;
-
-            } else {
-                System.out.println("Ungültige Eingabe. Bitte erneut versuchen.");
-            }
-        }
-
-
+        System.out.println("Unsortierte Ausgabe: ");
         for (String name : strarr) {        //Ausgabe der Sortierung
             System.out.println(name);
         }
+        System.out.println();
+
+        System.out.println("InsertionSort Ausgabe: ");
+        insertionSort(strarr);
+        for (String name : strarr) {
+            System.out.println(name);
+        }
+        System.out.println();
+
+        System.out.println("SelectionSort Ausgabe: ");
+        selectionSort(strarr);
+        for (String name : strarr) {
+            System.out.println(name);
+        }
+        System.out.println();
 
 
-        System.out.println("Anna, Gustav, Bernt, Lisa, Jakob, Sebastian, Nina");
         System.out.println("Welchen Namen möchten Sie suchen:");
         String eingabe2 = sc.next();
 
@@ -79,7 +75,7 @@ public class Main {
         }
     }
 
-    public static int binaerSuche(String[] strarr, String ziel) {
+    public static int binaerSuche(String[] strarr, String target) {
         int left = 0;
         int right = strarr.length - 1;      //Beginn von Hinten
         int middle = 0;
@@ -88,13 +84,13 @@ public class Main {
         while (left <= right && gefunden == false) {
 
             middle = left + (right - left) / 2;     // Er sucht sich die Mitte
-            int vergleich = strarr[middle].compareTo(ziel); // Er schaut, ob gesuchte Name größer oder kleiner als die mitte ist
+            int vergleich = strarr[middle].compareTo(target); // Er schaut, ob gesuchte Name größer oder kleiner als die mitte ist
 
             if (vergleich == 0) {
                 gefunden = true;
             } else if (vergleich < 0) { //Hier vergleicht er
                 left = middle + 1;
-            } else {
+            } else if (vergleich > 0){
                 right = middle - 1;
             }
         }
